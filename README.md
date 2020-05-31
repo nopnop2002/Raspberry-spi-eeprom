@@ -6,9 +6,18 @@ SPI EEPROM Access Library for RaspberryPi
 
 # Memory size
 
-|Device|# of Bits|# of Bytes|Page Size(Byte)|Addr Range|Block Range|
+|Device|# of Bits|# of Bytes|Page Size(Byte)|Address Range|Block Range|
 |:---|:---|:---|:---|:---|:---|
 |25010|1K|128|8|0-0x7f|0-15|
+|25020|2K|256|8|0-0xff|0-31|
+|25040|4K|512|8|0-0x1ff|0-63|
+|25080|8K|1024|32|0-0x3ff|0-31|
+|25160|16K|2048|32|0-0x7ff|0-63|
+|25320|32K|4096|32|0-0xfff|0-127|
+|25640|64K|8192|32|0-0x1fff|0-255|
+|25128|128K|16384|64|0-0x3fff|0-255|
+|25256|256K|32768|64|0-0x7fff|0-511|
+|25512|512K|65536|128|0-0x7fff|0-511|
 
 ---
 
@@ -19,8 +28,33 @@ WiringPi Library
 ---
 
 # Build
+
 for 25010   
 cc -o main main.c at25.c -lwiringPi -DAT25010
+
+for 25020   
+cc -o main main.c at25.c -lwiringPi -DAT25020
+
+for 25040   
+cc -o main main.c at25.c -lwiringPi -DAT25040
+
+for 25080   
+cc -o main main.c at25.c -lwiringPi -DAT25080
+
+for 25160   
+cc -o main main.c at25.c -lwiringPi -DAT25160
+
+for 25320   
+cc -o main main.c at25.c -lwiringPi -DAT25320
+
+for 25640   
+cc -o main main.c at25.c -lwiringPi -DAT25640
+
+for 25128   
+cc -o main main.c at25.c -lwiringPi -DAT25128
+
+for 25256   
+cc -o main main.c at25.c -lwiringPi -DAT25256
 
 ---
 
