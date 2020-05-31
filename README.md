@@ -17,7 +17,7 @@ SPI EEPROM Access Library for RaspberryPi
 |25640|64K|8192|32|0-0x1fff|0-255|
 |25128|128K|16384|64|0-0x3fff|0-255|
 |25256|256K|32768|64|0-0x7fff|0-511|
-|25512|512K|65536|128|0-0x7fff|0-511|
+|25512|512K|65536|128|0-0xffff|0-511|
 
 ---
 
@@ -65,7 +65,7 @@ cc -o main main.c at25.c -lwiringPi -DAT25256
 ![AT25020](https://user-images.githubusercontent.com/6020549/83345862-ae970500-a352-11ea-8172-4bde0962ffb7.jpg)
 
 - 25040   
-![AT25640](https://user-images.githubusercontent.com/6020549/83345861-ad65d800-a352-11ea-90c5-0e6697cebd65.jpg)
+![AT25040](https://user-images.githubusercontent.com/6020549/83346120-bd7eb700-a354-11ea-912b-c2228e29714c.jpg)
 
 - 25080   
 ![AT25080](https://user-images.githubusercontent.com/6020549/83345864-b060c880-a352-11ea-998a-67d2a7bd0e27.jpg)
