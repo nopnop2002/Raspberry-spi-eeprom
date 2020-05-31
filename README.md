@@ -56,6 +56,9 @@ cc -o main main.c at25.c -lwiringPi -DAT25128
 for 25256   
 cc -o main main.c at25.c -lwiringPi -DAT25256
 
+for 25512   
+cc -o main main.c at25.c -lwiringPi -DAT25512
+
 ---
 
 - 25010   
