@@ -43,12 +43,12 @@
 
 struct eeprom
 {
-    int16_t _channel;
-    int16_t _model;
-    uint32_t _totalBytes;    // eeprom memory size
-    int16_t _addrBits;        // number of address bit
-    int16_t _pageSize;        // bytes per page
-    int16_t _lastPage;        // last page
+	int16_t _channel;
+	int16_t _model;
+	uint32_t _totalBytes;    // eeprom memory size
+	int16_t _addrBits;        // number of address bit
+	int16_t _pageSize;        // bytes per page
+	int16_t _lastPage;        // last page
 	char 	_name[16];
 };
 
