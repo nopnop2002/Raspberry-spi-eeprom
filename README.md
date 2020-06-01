@@ -29,63 +29,63 @@ WiringPi Library
 
 # Build
 
-for 25010   
+for AT25010   
 cc -o main main.c at25.c -lwiringPi -DAT25010
 
-for 25020   
+for AT25020   
 cc -o main main.c at25.c -lwiringPi -DAT25020
 
-for 25040   
+for AT25040   
 cc -o main main.c at25.c -lwiringPi -DAT25040
 
-for 25080   
+for AT25080   
 cc -o main main.c at25.c -lwiringPi -DAT25080
 
-for 25160   
+for AT25160   
 cc -o main main.c at25.c -lwiringPi -DAT25160
 
-for 25320   
+for AT25320   
 cc -o main main.c at25.c -lwiringPi -DAT25320
 
-for 25640   
+for AT25640   
 cc -o main main.c at25.c -lwiringPi -DAT25640
 
-for 25128   
+for AT25128   
 cc -o main main.c at25.c -lwiringPi -DAT25128
 
-for 25256   
+for AT25256   
 cc -o main main.c at25.c -lwiringPi -DAT25256
 
-for 25512   
+for AT25512   
 cc -o main main.c at25.c -lwiringPi -DAT25512
 
 ---
 
-- 25010   
+- AT25010   
 ![AT25010](https://user-images.githubusercontent.com/6020549/83345860-a0e17f80-a352-11ea-9515-fe1706c5eafa.jpg)
 
-- 25020   
+- AT25020   
 ![AT25020](https://user-images.githubusercontent.com/6020549/83345862-ae970500-a352-11ea-8172-4bde0962ffb7.jpg)
 
-- 25040   
+- AT25040   
 ![AT25040](https://user-images.githubusercontent.com/6020549/83346120-bd7eb700-a354-11ea-912b-c2228e29714c.jpg)
 
-- 25080   
+- AT25080   
 ![AT25080](https://user-images.githubusercontent.com/6020549/83345864-b060c880-a352-11ea-998a-67d2a7bd0e27.jpg)
 
-- 25160   
+- AT25160   
 ![AT25160](https://user-images.githubusercontent.com/6020549/83345868-b22a8c00-a352-11ea-8293-e8196d1663c4.jpg)
 
-- 25320   
+- AT25320   
 ![AT25320](https://user-images.githubusercontent.com/6020549/83345873-b48ce600-a352-11ea-85ea-787d8d4b70e1.jpg)
 
-- 25640   
+- AT25640   
 ![AT25640](https://user-images.githubusercontent.com/6020549/83345861-ad65d800-a352-11ea-90c5-0e6697cebd65.jpg)
 
-- 25128   
+- AT25128   
 ![AT25128](https://user-images.githubusercontent.com/6020549/83345867-b191f580-a352-11ea-8e53-0bab88ba3a4b.jpg)
 
-- 25256   
+- AT25256   
 ![AT25256](https://user-images.githubusercontent.com/6020549/83345871-b35bb900-a352-11ea-8b56-d8b23075ac2f.jpg)
 
 ---
