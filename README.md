@@ -1,23 +1,23 @@
-# Raspberry-at25
+# Raspberry-AT25
 
-SPI EEPROM Access Library for RaspberryPi
+AT25 series SPI EEPROM Access Library for RaspberryPi
 
 ---
 
 # Memory size
 
-|Device|# of Bits|# of Bytes|Page Size(Byte)|Address Range|Block Range|
-|:---|:---|:---|:---|:---|:---|
-|AT25010|1K|128|8|0-0x7F|0-15|
-|AT25020|2K|256|8|0-0xFF|0-31|
-|AT25040|4K|512|8|0-0x1FF|0-63|
-|AT25080|8K|1024|32|0-0x3FF|0-31|
-|AT25160|16K|2048|32|0-0x7FF|0-63|
-|AT25320|32K|4096|32|0-0xFFF|0-127|
-|AT25640|64K|8192|32|0-0x1FFF|0-255|
-|AT25128|128K|16384|64|0-0x3FFF|0-255|
-|AT25256|256K|32768|64|0-0x7FFF|0-511|
-|AT25512|512K|65536|128|0-0xFFFF|0-511|
+|Device|# of Bits|# of Bytes|Page Size(Byte)|Address Range|
+|:---|:---|:---|:---|:---|
+|AT25010|1K|128|8|0-0x7F|
+|AT25020|2K|256|8|0-0xFF|
+|AT25040|4K|512|8|0-0x1FF|
+|AT25080|8K|1024|32|0-0x3FF|
+|AT25160|16K|2048|32|0-0x7FF|
+|AT25320|32K|4096|32|0-0xFFF|
+|AT25640|64K|8192|32|0-0x1FFF|
+|AT25128|128K|16384|64|0-0x3FFF|
+|AT25256|256K|32768|64|0-0x7FFF|
+|AT25512|512K|65536|128|0-0xFFFF|
 
 ---
 
