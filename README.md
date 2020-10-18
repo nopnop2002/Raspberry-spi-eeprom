@@ -102,7 +102,7 @@ cc -o main main.c eeprom.c -lwiringPi -DAT25512
 ---
 
 # stdout
-![AT25010](https://user-images.githubusercontent.com/6020549/83345860-a0e17f80-a352-11ea-9515-fe1706c5eafa.jpg)
+![raspberry-spi-eeprom](https://user-images.githubusercontent.com/6020549/96356857-3bd6cc80-112f-11eb-8cec-49730bd15abe.jpg)
 
 ---
 
