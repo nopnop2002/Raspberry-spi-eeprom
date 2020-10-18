@@ -13,7 +13,6 @@ WiringPi Library
 # Memory size
 
 ## ST Micro   
-10 MHz Clock Rate.   
 There are several variations in the M95 series.   
 4.5 V to 5.5 V for M95xxx   
 2.5 V to 5.5 V for M95xxx-W   
