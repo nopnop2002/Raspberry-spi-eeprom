@@ -19,7 +19,6 @@
   M25640  cc -o main main.c at25.c -lwiringPi -DM25640
   M25128  cc -o main main.c at25.c -lwiringPi -DM25128
   M25256  cc -o main main.c at25.c -lwiringPi -DM25256
-  M25512  cc -o main main.c at25.c -lwiringPi -DM25512
 */
 
 #include <stdio.h>

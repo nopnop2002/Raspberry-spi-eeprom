@@ -1,10 +1,36 @@
-# Raspberry-AT25
+# Raspberry-spi-eeprom
 
-AT25 series SPI EEPROM Access Library for RaspberryPi
+SPI EEPROM Access Library for RaspberryPi
+
+---
+
+# Software requirement
+
+WiringPi Library   
 
 ---
 
 # Memory size
+
+## ST Micro   
+10 MHz Clock Rate.   
+There are several variations in the M95 series.   
+4.5 V to 5.5 V for M95xxx   
+2.5 V to 5.5 V for M95xxx-W   
+1.8 V to 5.5 V for M95xxx-R   
+
+__M95xxx don't work with ESP32__
+
+|Device|# of Bits|# of Bytes|Byte Address range|Page Size(Byte)|Page Address Range|
+|:---|:---|:---|:---|:---|:---|
+|M95080|8K|1024|0x00-0x3FF|32|0-31|
+|M95160|16K|2048|0x00-0x7FF|32|0-63|
+|M95320|32K|4096|0x00-0xFFF|32|0-127|
+|M95640|64K|8192|0x00-0x1FFF|32|0-255|
+|M95128|128K|16384|0x00-0x3FFF|64|0-127|
+|M95256|256K|32768|0x00-0x7FFF|64|0-255|
+
+## ATMEL   
 
 |Device|# of Bits|# of Bytes|Byte Address Range|Page Size(Byte)|Page Address Range|
 |:---|:---|:---|:---|:---|:---|
@@ -21,72 +47,62 @@ AT25 series SPI EEPROM Access Library for RaspberryPi
 
 ---
 
-# Software requirement
-
-WiringPi Library   
-
----
-
 # Build
 
+## ST Micro   
+for M95080   
+cc -o main main.c eeprom.c -lwiringPi -DM95080
+
+for M95160   
+cc -o main main.c eeprom.c -lwiringPi -DM95160
+
+for M95320   
+cc -o main main.c eeprom.c -lwiringPi -DM95320
+
+for M95640   
+cc -o main main.c eeprom.c -lwiringPi -DM95640
+
+for M95128   
+cc -o main main.c eeprom.c -lwiringPi -DM95128
+
+for M95256   
+cc -o main main.c eeprom.c -lwiringPi -DM95256
+
+## ATMEL   
 for AT25010   
-cc -o main main.c at25.c -lwiringPi -DAT25010
+cc -o main main.c eeprom.c -lwiringPi -DAT25010
 
 for AT25020   
-cc -o main main.c at25.c -lwiringPi -DAT25020
+cc -o main main.c eeprom.c -lwiringPi -DAT25020
 
 for AT25040   
-cc -o main main.c at25.c -lwiringPi -DAT25040
+cc -o main main.c eeprom.c -lwiringPi -DAT25040
 
 for AT25080   
-cc -o main main.c at25.c -lwiringPi -DAT25080
+cc -o main main.c eeprom.c -lwiringPi -DAT25080
 
 for AT25160   
-cc -o main main.c at25.c -lwiringPi -DAT25160
+cc -o main main.c eeprom.c -lwiringPi -DAT25160
 
 for AT25320   
-cc -o main main.c at25.c -lwiringPi -DAT25320
+cc -o main main.c eeprom.c -lwiringPi -DAT25320
 
 for AT25640   
-cc -o main main.c at25.c -lwiringPi -DAT25640
+cc -o main main.c eeprom.c -lwiringPi -DAT25640
 
 for AT25128   
-cc -o main main.c at25.c -lwiringPi -DAT25128
+cc -o main main.c eeprom.c -lwiringPi -DAT25128
 
 for AT25256   
-cc -o main main.c at25.c -lwiringPi -DAT25256
+cc -o main main.c eeprom.c -lwiringPi -DAT25256
 
 for AT25512   
-cc -o main main.c at25.c -lwiringPi -DAT25512
+cc -o main main.c eeprom.c -lwiringPi -DAT25512
 
 ---
 
-- AT25010   
+# stdout
 ![AT25010](https://user-images.githubusercontent.com/6020549/83345860-a0e17f80-a352-11ea-9515-fe1706c5eafa.jpg)
-
-- AT25020   
-![AT25020](https://user-images.githubusercontent.com/6020549/83345862-ae970500-a352-11ea-8172-4bde0962ffb7.jpg)
-
-- AT25040   
-![AT25040](https://user-images.githubusercontent.com/6020549/83346120-bd7eb700-a354-11ea-912b-c2228e29714c.jpg)
-
-- AT25080   
-![AT25080](https://user-images.githubusercontent.com/6020549/83345864-b060c880-a352-11ea-998a-67d2a7bd0e27.jpg)
-
-- AT25160   
-![AT25160](https://user-images.githubusercontent.com/6020549/83345868-b22a8c00-a352-11ea-8293-e8196d1663c4.jpg)
-
-- AT25320   
-![AT25320](https://user-images.githubusercontent.com/6020549/83345873-b48ce600-a352-11ea-85ea-787d8d4b70e1.jpg)
-
-- AT25640   
-![AT25640](https://user-images.githubusercontent.com/6020549/83345861-ad65d800-a352-11ea-90c5-0e6697cebd65.jpg)
-
-- AT25128   
-![AT25128](https://user-images.githubusercontent.com/6020549/83345867-b191f580-a352-11ea-8e53-0bab88ba3a4b.jpg)
-
-- AT25256   
-![AT25256](https://user-images.githubusercontent.com/6020549/83345871-b35bb900-a352-11ea-8b56-d8b23075ac2f.jpg)
 
 ---
 
@@ -94,7 +110,7 @@ cc -o main main.c at25.c -lwiringPi -DAT25512
 
 ```
 // Open device
-uint16_t eeprom_open(struct eeprom *dev, int16_t channel, int16_t model);
+uint32_t eeprom_open(struct eeprom *dev, int16_t channel, uint32_t model);
 
 // Get EEPROM memory byte size
 uint32_t eeprom_totalBytes(struct eeprom *dev);

@@ -1,5 +1,5 @@
 /*
-  at25.c - Library for the SPI Serial EEPROM chip
+  eeprom.c - Library for the SPI Serial EEPROM chip
 */
 #include <stdio.h>
 #include <stdint.h>
@@ -9,71 +9,129 @@
 #include <wiringPi.h>
 #include <wiringPiSPI.h>
 
-#include "at25.h"
+#include "eeprom.h"
 
 
-uint16_t eeprom_open(struct eeprom *dev, int16_t channel, int16_t model)
+uint32_t eeprom_open(struct eeprom *dev, int16_t channel, uint32_t model)
 {
-	if (model == A010) {
+	// ATMEL
+	if (model == 25010) {
 		dev->_totalBytes = 128;
 		dev->_addrBits = 7;
 		dev->_pageSize = 8;
-		dev->_lastPage = 15;
+		dev->_lastPage = (dev->_totalBytes/dev->_pageSize)-1;
 		strcpy(dev->_name, "AT25010");
-	} else if (model == A020) {
+	} else if (model == 25020) {
 		dev->_totalBytes = 256;
 		dev->_addrBits = 8;
 		dev->_pageSize = 8;
-		dev->_lastPage = 31;
+		dev->_lastPage = (dev->_totalBytes/dev->_pageSize)-1;
 		strcpy(dev->_name, "AT25020");
-	} else if (model == A040) {
+	} else if (model == 25040) {
 		dev->_totalBytes = 512;
 		dev->_addrBits = 9;
 		dev->_pageSize = 8;
-		dev->_lastPage = 63;
+		dev->_lastPage = (dev->_totalBytes/dev->_pageSize)-1;
 		strcpy(dev->_name, "AT25040");
-	} else if (model == A080) {
+	} else if (model == 25080) {
 		dev->_totalBytes = 1024;
 		dev->_addrBits = 10;
 		dev->_pageSize = 32;
-		dev->_lastPage = 31;
+		dev->_lastPage = (dev->_totalBytes/dev->_pageSize)-1;
 		strcpy(dev->_name, "AT25080");
-	} else if (model == A160) {
+	} else if (model == 25160) {
 		dev->_totalBytes = 2048;
 		dev->_addrBits = 11;
 		dev->_pageSize = 32;
-		dev->_lastPage = 63;
+		dev->_lastPage = (dev->_totalBytes/dev->_pageSize)-1;
 		strcpy(dev->_name, "AT25160");
-	} else if (model == A320) {
+	} else if (model == 25320) {
 		dev->_totalBytes = 4096;
 		dev->_addrBits = 12;
 		dev->_pageSize = 32;
-		dev->_lastPage = 127;
+		dev->_lastPage = (dev->_totalBytes/dev->_pageSize)-1;
 		strcpy(dev->_name, "AT25320");
-	} else if (model == A640) {
+	} else if (model == 25640) {
 		dev->_totalBytes = 8192;
 		dev->_addrBits = 13;
 		dev->_pageSize = 32;
-		dev->_lastPage = 255;
+		dev->_lastPage = (dev->_totalBytes/dev->_pageSize)-1;
 		strcpy(dev->_name, "AT25640");
-	} else if (model == A128) {
+	} else if (model == 25128) {
 		dev->_totalBytes = 16384;
 		dev->_addrBits = 14;
 		dev->_pageSize = 64;
-		dev->_lastPage = 255;
+		dev->_lastPage = (dev->_totalBytes/dev->_pageSize)-1;
 		strcpy(dev->_name, "AT25128");
-	} else if (model == A256) {
+	} else if (model == 25256) {
 		dev->_totalBytes = 32768;
 		dev->_addrBits = 15;
 		dev->_pageSize = 64;
-		dev->_lastPage = 511;
+		dev->_lastPage = (dev->_totalBytes/dev->_pageSize)-1;
 		strcpy(dev->_name, "AT25256");
-	} else if (model == A512) {
+	} else if (model == 25512) {
 		dev->_totalBytes = 65536;
 		dev->_addrBits = 16;
 		dev->_pageSize = 128;
-		dev->_lastPage = 511;
+		dev->_lastPage = (dev->_totalBytes/dev->_pageSize)-1;
 		strcpy(dev->_name, "AT25512");
+	}
+
+	// ST Micro
+	if (model == 95010) {
+		dev->_totalBytes = 128;
+		dev->_addrBits = 7;
+		dev->_pageSize = 16;
+		dev->_lastPage = (dev->_totalBytes/dev->_pageSize)-1;
+		strcpy(dev->_name, "M95010");
+	} else if (model == 95020) {
+		dev->_totalBytes = 256;
+		dev->_addrBits = 8;
+		dev->_pageSize = 16;
+		dev->_lastPage = (dev->_totalBytes/dev->_pageSize)-1;
+		strcpy(dev->_name, "M95020");
+	} else if (model == 95040) {
+		dev->_totalBytes = 512;
+		dev->_addrBits = 9;
+		dev->_pageSize = 16;
+		dev->_lastPage = (dev->_totalBytes/dev->_pageSize)-1;
+		strcpy(dev->_name, "M95040");
+	} else if (model == 95080) {
+		dev->_totalBytes = 1024;
+		dev->_addrBits = 10;
+		dev->_pageSize = 32;
+		dev->_lastPage = (dev->_totalBytes/dev->_pageSize)-1;
+		strcpy(dev->_name, "M95080");
+	} else if (model == 95160) {
+		dev->_totalBytes = 2048;
+		dev->_addrBits = 11;
+		dev->_pageSize = 32;
+		dev->_lastPage = (dev->_totalBytes/dev->_pageSize)-1;
+		strcpy(dev->_name, "M95160");
+	} else if (model == 95320) {
+		dev->_totalBytes = 4096;
+		dev->_addrBits = 12;
+		dev->_pageSize = 32;
+		dev->_lastPage = (dev->_totalBytes/dev->_pageSize)-1;
+		strcpy(dev->_name, "M95320");
+	} else if (model == 95640) {
+		dev->_totalBytes = 8192;
+		dev->_addrBits = 13;
+		dev->_pageSize = 32;
+		dev->_lastPage = (dev->_totalBytes/dev->_pageSize)-1;
+		strcpy(dev->_name, "M95640");
+	} else if (model == 95128) {
+		dev->_totalBytes = 16384;
+		dev->_addrBits = 14;
+		dev->_pageSize = 64;
+		dev->_lastPage = (dev->_totalBytes/dev->_pageSize)-1;
+		strcpy(dev->_name, "M95128");
+	} else if (model == 95256) {
+		dev->_totalBytes = 32768;
+		dev->_addrBits = 15;
+		dev->_pageSize = 64;
+		dev->_lastPage = (dev->_totalBytes/dev->_pageSize)-1;
+		strcpy(dev->_name, "M95256");
 	}
 	dev->_channel = channel;
 	dev->_model = model;
@@ -85,7 +143,7 @@ void wait_ready(struct eeprom *dev)
 	//Wait until device is READY.
 	uint8_t data[2];
 	while(1) {
-		data[0] = AT25_RDSR_CMD;
+		data[0] = EEPROM_RDSR_CMD;
 		data[1] = 0x0;
 		int ret=wiringPiSPIDataRW (dev->_channel, data, 2);
 		if ((data[1] & 0x01) == 0) break;
@@ -100,11 +158,11 @@ void write_enable(struct eeprom *dev)
 	uint8_t data[2];
 
 	while(1) {
-		data[0] = AT25_WREN_CMD;
+		data[0] = EEPROM_WREN_CMD;
 		int ret=wiringPiSPIDataRW (dev->_channel, data, 1);
 		usleep(DELAY_WAIT);
 
-		data[0] = AT25_RDSR_CMD;
+		data[0] = EEPROM_RDSR_CMD;
 		data[1] = 0x0;
 		ret=wiringPiSPIDataRW (dev->_channel, data, 2);
 		//printf("write_enable data[1]=%x\n",data[1]);
@@ -120,7 +178,7 @@ void eeprom_writeByte(struct eeprom *dev, uint16_t address, uint8_t data)
 
 	uint8_t index;
 	uint8_t work[4];
-	work[0] = AT25_WRITE_CMD;
+	work[0] = EEPROM_WRITE_CMD;
 	if (dev->_addrBits == 9 && address > 0xff) work[0] = work[0] | 0x8;
 if(DEBUG)printf("[write_byte] address=0x%x work[0]=0x%x\n",address, work[0]);
 
@@ -145,7 +203,7 @@ void eeprom_writePage(struct eeprom *dev, uint16_t pages, uint8_t *data)
 	uint8_t index;
 	uint8_t *work = (uint8_t *)malloc(128);
 	uint16_t address = pages * dev->_pageSize;
-	work[0] = AT25_WRITE_CMD;
+	work[0] = EEPROM_WRITE_CMD;
 	if (dev->_addrBits == 9 && address > 0xff) work[0] = work[0] | 0x8;
 if(DEBUG)printf("[write_pageSize] address=%x work[0]=%x\n",address, work[0]);
 
@@ -170,7 +228,7 @@ if(DEBUG)printf("[write_pageSize] _pageSize=%d\n", dev->_pageSize);
 uint8_t eeprom_readByte(struct eeprom *dev, uint16_t address)
 {
 	uint8_t work[4];
-	work[0] = AT25_READ_CMD;
+	work[0] = EEPROM_READ_CMD;
 	if (dev->_addrBits == 9 && address > 0xff) work[0] = work[0] | 0x8;
 if(DEBUG)printf("[read_byte] address=0x%x work[0]=0x%x\n",address, work[0]);
 
