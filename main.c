@@ -1,24 +1,25 @@
 /*
-  AT25010  cc -o main main.c at25.c -lwiringPi -DAT25010
-  AT25020  cc -o main main.c at25.c -lwiringPi -DAT25020
-  AT25040  cc -o main main.c at25.c -lwiringPi -DAT25040
-  AT25080  cc -o main main.c at25.c -lwiringPi -DAT25080
-  AT25160  cc -o main main.c at25.c -lwiringPi -DAT25160
-  AT25320  cc -o main main.c at25.c -lwiringPi -DAT25320
-  AT25640  cc -o main main.c at25.c -lwiringPi -DAT25640
-  AT25128  cc -o main main.c at25.c -lwiringPi -DAT25128
-  AT25256  cc -o main main.c at25.c -lwiringPi -DAT25256
-  AT25512  cc -o main main.c at25.c -lwiringPi -DAT25512
+  AT25010  cc -o main main.c eeprom.c -lwiringPi -DAT25010
+  AT25020  cc -o main main.c eeprom.c -lwiringPi -DAT25020
+  AT25040  cc -o main main.c eeprom.c -lwiringPi -DAT25040
+  AT25080  cc -o main main.c eeprom.c -lwiringPi -DAT25080
+  AT25160  cc -o main main.c eeprom.c -lwiringPi -DAT25160
+  AT25320  cc -o main main.c eeprom.c -lwiringPi -DAT25320
+  AT25640  cc -o main main.c eeprom.c -lwiringPi -DAT25640
+  AT25128  cc -o main main.c eeprom.c -lwiringPi -DAT25128
+  AT25256  cc -o main main.c eeprom.c -lwiringPi -DAT25256
+  AT25512  cc -o main main.c eeprom.c -lwiringPi -DAT25512
 
-  M25010  cc -o main main.c at25.c -lwiringPi -DM25010
-  M25020  cc -o main main.c at25.c -lwiringPi -DM25020
-  M25040  cc -o main main.c at25.c -lwiringPi -DM25040
-  M25080  cc -o main main.c at25.c -lwiringPi -DM25080
-  M25160  cc -o main main.c at25.c -lwiringPi -DM25160
-  M25320  cc -o main main.c at25.c -lwiringPi -DM25320
-  M25640  cc -o main main.c at25.c -lwiringPi -DM25640
-  M25128  cc -o main main.c at25.c -lwiringPi -DM25128
-  M25256  cc -o main main.c at25.c -lwiringPi -DM25256
+  M95010  cc -o main main.c eeprom.c -lwiringPi -DM95010
+  M95020  cc -o main main.c eeprom.c -lwiringPi -DM95020
+  M95040  cc -o main main.c eeprom.c -lwiringPi -DM95040
+  M95080  cc -o main main.c eeprom.c -lwiringPi -DM95080
+  M95160  cc -o main main.c eeprom.c -lwiringPi -DM95160
+  M95320  cc -o main main.c eeprom.c -lwiringPi -DM95320
+  M95640  cc -o main main.c eeprom.c -lwiringPi -DM95640
+  M95128  cc -o main main.c eeprom.c -lwiringPi -DM95128
+  M95256  cc -o main main.c eeprom.c -lwiringPi -DM95256
+  M95512  cc -o main main.c eeprom.c -lwiringPi -DM95512
 */
 
 #include <stdio.h>
@@ -29,7 +30,7 @@
 #include <wiringPi.h>
 #include <wiringPiSPI.h>
 
-#include "at25.h"
+#include "eeprom.h"
 
 #define GPIO_CS    10
 #define SPI_CHANNEL 0 // /dev/spidev0.0
@@ -71,35 +72,66 @@ int main(int argc, char *argv[])
 {
 	// set EEPROM memory size
 	int eeprom_model = 0;
+
+// ATMEL
 #ifdef AT25010
-	eeprom_model = A010;
+	eeprom_model = 25010;
 #endif
 #ifdef AT25020
-	eeprom_model = A020;
+	eeprom_model = 25020;
 #endif
 #ifdef AT25040
-	eeprom_model = A040;
+	eeprom_model = 25040;
 #endif
 #ifdef AT25080
-	eeprom_model = A080;
+	eeprom_model = 25080;
 #endif
 #ifdef AT25160
-	eeprom_model = A160;
+	eeprom_model = 25160;
 #endif
 #ifdef AT25320
-	eeprom_model = A320;
+	eeprom_model = 25320;
 #endif
 #ifdef AT25640
-	eeprom_model = A640;
+	eeprom_model = 25640;
 #endif
 #ifdef AT25128
-	eeprom_model = A128;
+	eeprom_model = 25128;
 #endif
 #ifdef AT25256
-	eeprom_model = A256;
+	eeprom_model = 25256;
 #endif
 #ifdef AT25512
-	eeprom_model = A512;
+	eeprom_model = 25512;
+#endif
+
+// ST Micro
+#ifdef M95010
+	eeprom_model = 95010;
+#endif
+#ifdef M95020
+	eeprom_model = 95020;
+#endif
+#ifdef M95040
+	eeprom_model = 95040;
+#endif
+#ifdef M95080
+	eeprom_model = 95080;
+#endif
+#ifdef M95160
+	eeprom_model = 95160;
+#endif
+#ifdef M95320
+	eeprom_model = 95320;
+#endif
+#ifdef M95640
+	eeprom_model = 95640;
+#endif
+#ifdef M95128
+	eeprom_model = 95128;
+#endif
+#ifdef M95256
+	eeprom_model = 95256;
 #endif
 
 	printf("eeprom_model=%d\n",eeprom_model);
@@ -123,6 +155,7 @@ int main(int argc, char *argv[])
 
 	// Start SPI with 2MHz
 	if (wiringPiSPISetup(SPI_CHANNEL, 2000000) < 0) {
+	//if (wiringPiSPISetup(SPI_CHANNEL, 8000000) < 0) {
 		printf("wiringPiSPISetup failed:\n");
 		return 1;
 	}
