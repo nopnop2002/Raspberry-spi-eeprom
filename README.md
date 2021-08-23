@@ -4,9 +4,24 @@ SPI EEPROM Access Library for RaspberryPi
 
 ---
 
-# Software requirement
+# Software requirement   
+- WiringPi Library   
+ This project uses the wiringPiSPISetup() function to initialize SPI, and use /dev/spidev0.0.   
+ If you use it on a board other than the RPI board, you may need to change the SPI device.   
+ As far as I know, there are these libraries.   
+	- WiringPi for OrangePi   
+	- WiringPi for BananaPi   
+	- WiringPi for NanoPi   
+	- WiringPi for Pine-64   
 
-WiringPi Library   
+```
+#define SPI_CHANNEL 0 // /dev/spidev0.0
+//#define SPI_CHANNEL 1 // /dev/spidev0.1
+
+
+snprintf(device, 19, "/dev/spidev0.%d", SPI_CHANNEL);
+
+```
 
 ---
 

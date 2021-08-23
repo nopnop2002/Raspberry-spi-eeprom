@@ -32,7 +32,6 @@
 
 #include "eeprom.h"
 
-#define GPIO_CS    10
 #define SPI_CHANNEL 0 // /dev/spidev0.0
 //#define SPI_CHANNEL 1 // /dev/spidev0.1
 
